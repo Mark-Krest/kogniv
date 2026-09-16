@@ -6,7 +6,7 @@
 const CONFIG = {
     // URL веб-приложения Google Apps Script.
     // Если оставить заглушку — форма будет отправлять через WhatsApp.
-    endpoint: 'https://script.google.com/macros/s/ТВОЙ_URL/exec'
+    endpoint: 'https://script.google.com/macros/s/AKfycbwvLs2lD4QHb3WmHGadxmg-U5QdcJq_rLqOnOJAOd23g3aUsd1T45psKasMA7rfPwA/exec'
 };
 
 const WHATSAPP_PHONE = '79991234567';
