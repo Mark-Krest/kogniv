@@ -187,45 +187,46 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ============================================================
        8. ВЫБОР ТАРИФА — обязательный шаг
        ============================================================ */
-    let selectedPlan = ''; // текущий выбранный тариф
+    let selectedPlan = '';
 
-    const pricingGrid = document.getElementById('pricingGrid');
     const pricingError = document.getElementById('pricingError');
     const planBox = document.getElementById('bookingPlan');
     const planValue = document.getElementById('bookingPlanValue');
 
     function selectPlan(card) {
         // Снимаем выделение со всех карточек
-        pricingGrid.querySelectorAll('.price-card--selected').forEach(c => {
+        document.querySelectorAll('.price-card--selected').forEach(c => {
             c.classList.remove('price-card--selected');
         });
 
         // Выделяем выбранную
         card.classList.add('price-card--selected');
-        selectedPlan = card.dataset.plan;
+        selectedPlan = card.dataset.plan || card.querySelector('.price-card__name')?.textContent || 'Тариф';
 
-        // Прячем ошибку, если была
         if (pricingError) pricingError.hidden = true;
 
-        // Показываем плашку в форме
         if (planBox && planValue) {
             planValue.textContent = selectedPlan;
             planBox.hidden = false;
         }
     }
 
-    if (pricingGrid) {
-        pricingGrid.querySelectorAll('.price-card--selectable').forEach(card => {
-            card.addEventListener('click', () => {
-                selectPlan(card);
+    // Делегирование: ловим клики на всём документе — работает,
+    // даже если карточки перерисуются или скрипт загрузится с опозданием
+    document.addEventListener('click', (e) => {
+        const card = e.target.closest('.price-card--selectable');
+        if (!card) return;
 
-                // Плавно скроллим к форме, чтобы клиент продолжил оформление
-                setTimeout(() => {
-                    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
-                }, 350);
-            });
-        });
-    }
+        selectPlan(card);
+
+        // Плавный скролл к форме
+        const booking = document.getElementById('booking');
+        if (booking) {
+            setTimeout(() => {
+                booking.scrollIntoView({ behavior: 'smooth' });
+            }, 350);
+        }
+    });
 
     /* ============================================================
        9. ФОРМА ЗАПИСИ
