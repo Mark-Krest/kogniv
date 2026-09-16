@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kogniv Лабинск — Настроим телефон вашим родителям за один визит</title>
+    <meta name="description" content="Kogniv Лабинск: помощь пожилым с телефоном. WhatsApp, Госуслуги, оплата ЖКХ. Мастер приедет домой, всё настроит и научит. Защита от мошенников. Выезд по Лабинску и району.">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/icon.svg">
+    <meta name="theme-color" content="#0B0C10">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- ================= ПРЕЛОАДЕР ================= -->
+    <div class="preloader" id="preloader">
+        <span class="logo__icon-wrap logo__icon-wrap--preloader">
+            <span class="logo__ring" aria-hidden="true"></span>
+            <img src="assets/icon.svg" alt="Kogniv" class="preloader__icon">
+        </span>
+        <div class="preloader__logo">KOGNIV</div>
+        <div class="preloader__bar">
+            <div class="preloader__bar-fill" id="preloaderBar"></div>
+        </div>
+        <div class="preloader__status" id="preloaderStatus">ЗАГРУЗКА СИСТЕМЫ...</div>
+    </div>
+
+    <!-- ================= ШАПКА ================= -->
+    <header class="header" id="header">
+        <div class="container header__inner">
+            <a href="#" class="logo logo--full">
+                <span class="logo__icon-wrap">
+                    <span class="logo__ring" aria-hidden="true"></span>
+                    <img src="assets/icon.svg" alt="Kogniv" class="logo__icon">
+                </span>
+                <span class="logo__name">KOGNIV</span>
+            </a>
+            <nav class="nav" id="nav">
+                <a href="#cases" class="nav__link">Ситуации</a>
+                <a href="#services" class="nav__link">Услуги</a>
+                <a href="#how" class="nav__link">Как работаем</a>
+                <a href="#pricing" class="nav__link">Цены</a>
+                <a href="#faq" class="nav__link">Вопросы</a>
+            </nav>
+            <div class="header__actions">
+                <a href="tel:+79604792729" class="header__phone">8 (999) 123-45-67</a>
+                <a href="https://wa.me/79604792729?text=Здравствуйте!%20Пишу%20с%20сайта%20Kogniv.%20Я%20из%20Лабинска.%20Нужна%20помощь%20с%20телефоном%20для%20близкого%20человека"
+                   class="btn btn--wa btn--small" target="_blank" rel="noopener">
+                    WhatsApp <span class="btn__icon">⚡</span>
+                </a>
+                <button class="burger" id="burger" aria-label="Меню">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="hero">
+        <div class="hero__grid-bg" aria-hidden="true"></div>
+        <div class="container hero__inner">
+            <p class="hero__system">/// СИСТЕМА ПОМОЩИ АКТИВИРОВАНА /// ЛАБИНСК</p>
+            <h1 class="hero__title">
+                <span class="typewriter" id="typewriter"
+                      data-text="ВКЛЮЧИМ ТЕЛЕФОН ВАШИХ РОДИТЕЛЕЙ ЗА ОДИН ВИЗИТ"></span>
+            </h1>
+            <p class="hero__subtitle">
+                Лабинск и район • WhatsApp • Госуслуги • оплата ЖКХ —
+                без нервов и сложных слов. Мастер Kogniv приедет домой,
+                всё настроит и научит пользоваться.
+            </p>
+            <div class="hero__buttons">
+                <a href="#booking" class="btn btn--primary">ЗАПИСАТЬСЯ <span class="btn__icon">▶</span></a>
+                <a href="https://wa.me/79604792729?text=Здравствуйте!%20Пишу%20с%20сайта%20Kogniv.%20Я%20из%20Лабинска.%20Нужна%20помощь%20с%20телефоном%20для%20близкого%20человека"
+                   class="btn btn--wa" target="_blank" rel="noopener">НАПИСАТЬ В WHATSAPP</a>
+            </div>
+        </div>
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee__track">
+                <span>лабинск /// настройка смартфона /// защита от мошенников /// госуслуги /// whatsapp и видеосвязь /// оплата жкх /// терпение и простые слова /// выезд по району /// лабинск /// настройка смартфона /// защита от мошенников /// госуслуги /// whatsapp и видеосвязь /// оплата жкх /// терпение и простые слова /// выезд по району ///</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ПРОБЛЕМА ================= -->
+    <section class="problem section">
+        <div class="container">
+            <div class="problem__quote panel">
+                <span class="panel__tag panel__tag--danger">// ВХОДЯЩИЙ СИГНАЛ</span>
+                <p class="problem__text">
+                    «Мама <b>3 часа</b> не могла отправить фото внуку.
+                    А мошенники позвонили ей <b>4 раза</b> на этой неделе»
+                </p>
+            </div>
+            <div class="stats">
+                <div class="stat panel">
+                    <div class="stat__num" data-target="87" data-suffix="%">0%</div>
+                    <div class="stat__label">мошеннических звонков нацелены на пожилых</div>
+                </div>
+                <div class="stat panel">
+                    <div class="stat__num" data-target="1" data-prefix="1 из " data-suffix="3">0</div>
+                    <div class="stat__label">пенсионеров не может самостоятельно оплатить ЖКХ</div>
+                </div>
+                <div class="stat panel">
+                    <div class="stat__num" data-target="15" data-suffix=" мин">0</div>
+                    <div class="stat__label">— и мы перезвоним вам после заявки</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ЗНАКОМЫЕ СИТУАЦИИ ================= -->
+    <section class="cases section" id="cases">
+        <div class="container">
+            <h2 class="section__title"><span class="accent">//</span> ЗНАКОМЫЕ СИТУАЦИИ?</h2>
+            <p class="cases__subtitle">С этим к нам обращаются каждый день. Узнаёте своих близких?</p>
+            <div class="cases__grid">
+
+                <article class="case panel">
+                    <div class="case__header">
+                        <span class="case__icon">📞</span>
+                        <span class="case__title">ЗВОНОК НЕИЗВЕСТНОГО</span>
+                        <span class="case__time">11:42</span>
+                    </div>
+                    <div class="case__bubble case__bubble--in">
+                        «Здравствуйте, служба безопасности банка! С вашей карты пытаются списать деньги...»
+                    </div>
+                    <div class="case__bubble case__bubble--out">
+                        Мама переводит 150 000 ₽ на «безопасный счёт» 😰
+                    </div>
+                    <div class="case__solve">🛡 Мы настроим фильтры и научим главному правилу: <b>банк никогда не просит переводы</b></div>
+                </article>
+
+                <article class="case panel">
+                    <div class="case__header">
+                        <span class="case__icon">💬</span>
+                        <span class="case__title">WHATSAPP</span>
+                        <span class="case__time">18:05</span>
+                    </div>
+                    <div class="case__bubble case__bubble--in">
+                        «Мам, ну нажми на зелёную камеру сверху!»
+                    </div>
+                    <div class="case__bubble case__bubble--in">
+                        «МАМ, НЕ ИМЕННО ЭТУ»
+                    </div>
+                    <div class="case__bubble case__bubble--out">
+                        «Внучка, давай завтра, я боюсь что-то сломать» 😔
+                    </div>
+                    <div class="case__solve">📷 Научим видеозвонкам за один визит — и внуков увидите каждый вечер</div>
+                </article>
+
+                <article class="case panel">
+                    <div class="case__header">
+                        <span class="case__icon">🏥</span>
+                        <span class="case__title">ПОЛИКЛИНИКА</span>
+                        <span class="case__time">08:15</span>
+                    </div>
+                    <div class="case__bubble case__bubble--in">
+                        Очередь к терапевту с 6 утра. Талончик — только через Госуслуги
+                    </div>
+                    <div class="case__bubble case__bubble--out">
+                        «Я туда не дойду, посижу — авось достанется» 😟
+                    </div>
+                    <div class="case__solve">🏥 Зарегистрируем на Госуслугах и оставим шпаргалку: запись к врачу в 3 нажатия</div>
+                </article>
+
+                <article class="case panel">
+                    <div class="case__header">
+                        <span class="case__icon">🧾</span>
+                        <span class="case__title">ЖКХ</span>
+                        <span class="case__time">25-е число</span>
+                    </div>
+                    <div class="case__bubble case__bubble--in">
+                        Квитанции лежат на столе. Стоять в очереди на почте — весь день
+                    </div>
+                    <div class="case__bubble case__bubble--out">
+                        «А соседке отключили свет, не успела заплатить» 😧
+                    </div>
+                    <div class="case__solve">🏠 Настроим оплату в пару нажатий — квитанции больше не страшны</div>
+                </article>
+
+            </div>
+            <div class="cases__cta">
+                <p>Узнали ситуацию? Это решается за один визит.</p>
+                <a href="#booking" class="btn btn--primary">ЗАПИСАТЬСЯ НА ВИЗИТ <span class="btn__icon">▶</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= УСЛУГИ ================= -->
+    <section class="services section" id="services">
+        <div class="container">
+            <h2 class="section__title"><span class="accent">//</span> ЧТО МЫ СДЕЛАЕМ</h2>
+            <div class="services__grid">
+                <article class="service-card panel">
+                    <span class="service-card__num">001</span>
+                    <div class="service-card__icon">💬</div>
+                    <h3 class="service-card__title">WhatsApp и видеосвязь</h3>
+                    <p>Научим звонить по видео, отправлять фото и голосовые сообщения внукам</p>
+                </article>
+                <article class="service-card panel">
+                    <span class="service-card__num">002</span>
+                    <div class="service-card__icon">🏥</div>
+                    <h3 class="service-card__title">Госуслуги и запись к врачу</h3>
+                    <p>Регистрация на портале, подтверждение аккаунта, запись в поликлинику</p>
+                </article>
+                <article class="service-card panel">
+                    <span class="service-card__num">003</span>
+                    <div class="service-card__icon">🏠</div>
+                    <h3 class="service-card__title">Оплата ЖКХ и счетов</h3>
+                    <p>Настроим оплату квартплаты, налогов и штрафов в пару нажатий</p>
+                </article>
+                <article class="service-card panel service-card--danger">
+                    <span class="service-card__num">004</span>
+                    <div class="service-card__icon">🛡</div>
+                    <h3 class="service-card__title">Защита от мошенников</h3>
+                    <p>Настроим фильтры спама и объясним, как распознать обманщиков</p>
+                </article>
+                <article class="service-card panel">
+                    <span class="service-card__num">005</span>
+                    <div class="service-card__icon">📷</div>
+                    <h3 class="service-card__title">Перенос фото и контактов</h3>
+                    <p>Перенесём всё со старого телефона на новый — ничего не потеряется</p>
+                </article>
+                <article class="service-card panel">
+                    <span class="service-card__num">006</span>
+                    <div class="service-card__icon">📺</div>
+                    <h3 class="service-card__title">ТВ и интернет</h3>
+                    <p>Настроим Smart TV, каналы, Wi-Fi и подключение новых устройств</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= КАК РАБОТАЕМ ================= -->
+    <section class="how section" id="how">
+        <div class="container">
+            <h2 class="section__title"><span class="accent">//</span> КАК ЭТО РАБОТАЕТ</h2>
+            <div class="how__steps">
+                <div class="how__step">
+                    <div class="how__num">01</div>
+                    <h3 class="how__title">Заявка</h3>
+                    <p>Форма ниже, звонок или WhatsApp. Уточним задачу и подберём время</p>
+                </div>
+                <div class="how__line" aria-hidden="true"></div>
+                <div class="how__step">
+                    <div class="how__num">02</div>
+                    <h3 class="how__title">Визит</h3>
+                    <p>Мастер приезжает домой, всё настраивает и обучает простыми словами</p>
+                </div>
+                <div class="how__line" aria-hidden="true"></div>
+                <div class="how__step">
+                    <div class="how__num">03</div>
+                    <h3 class="how__title">Результат</h3>
+                    <p>Всё работает! Фотоотчёт вам в WhatsApp + памятка-шпаргалка родителям</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ТАРИФЫ ================= -->
+    <section class="pricing section" id="pricing">
+        <div class="container">
+            <h2 class="section__title"><span class="accent">//</span> ТАРИФЫ</h2>
+            <div class="pricing__grid">
+                <article class="price-card panel">
+                    <h3 class="price-card__name">РАЗОВЫЙ</h3>
+                    <div class="price-card__value">990 ₽</div>
+                    <ul class="price-card__list">
+                        <li>Выезд до 1 часа</li>
+                        <li>Любая одна задача</li>
+                        <li>Памятка-шпаргалка в подарок</li>
+                        <li>Оплата после визита</li>
+                    </ul>
+                    <a href="#booking" class="btn btn--ghost">ВЫБРАТЬ</a>
+                </article>
+                <article class="price-card panel price-card--featured">
+                    <span class="price-card__badge">ПОПУЛЯРНЫЙ</span>
+                    <h3 class="price-card__name">ОПТИМАЛЬНЫЙ</h3>
+                    <div class="price-card__value">1 900 ₽</div>
+                    <ul class="price-card__list">
+                        <li>Выезд до 2 часов</li>
+                        <li>Сложные задачи: Госуслуги, банк</li>
+                        <li>Обучение + шпаргалка</li>
+                        <li>2 недели поддержки по телефону</li>
+                    </ul>
+                    <a href="#booking" class="btn btn--primary">ВЫБРАТЬ</a>
+                </article>
+                <article class="price-card panel">
+                    <h3 class="price-card__name">ПОДКЛЮЧЁН</h3>
+                    <div class="price-card__value">3 000 ₽<span class="price-card__period">/мес</span></div>
+                    <ul class="price-card__list">
+                        <li>4 визита в месяц</li>
+                        <li>Поддержка по телефону без лимита</li>
+                        <li>Приоритетный выезд</li>
+                        <li>Отчёты детям после каждого визита</li>
+                    </ul>
+                    <a href="#booking" class="btn btn--ghost">ВЫБРАТЬ</a>
+                </article>
+            </div>
+            <p class="pricing__note">// По Лабинску выезд бесплатно. Курганинск, Мостовской, Отрадная и по району — +300 ₽</p>
+        </div>
+    </section>
+
+    <!-- ================= ОТЗЫВЫ ================= -->
+    
+    <!-- ================= ЗАПИСЬ (ФОРМА) ================= -->
+    <section class="booking section" id="booking">
+        <div class="container">
+            <div class="booking__box panel">
+                <span class="panel__tag">// НОВАЯ ЗАЯВКА</span>
+                <h2 class="section__title booking__title">ЗАПИСАТЬСЯ НА ВИЗИТ</h2>
+                <p class="booking__subtitle">Опишите ситуацию — перезвоним в течение 15 минут и подберём удобное время. Работаем по Лабинску и району</p>
+
+                <form class="booking__form" id="bookingForm" novalidate>
+                    <div class="booking__row">
+                        <div class="booking__field">
+                            <label for="fName">ВАШЕ ИМЯ <span class="req">*</span></label>
+                            <input type="text" id="fName" name="name" placeholder="Как к вам обращаться" required maxlength="60">
+                        </div>
+                        <div class="booking__field">
+                            <label for="fPhone">ТЕЛЕФОН <span class="req">*</span></label>
+                            <input type="tel" id="fPhone" name="phone" placeholder="+7 (___) ___-__-__" required maxlength="20">
+                        </div>
+                    </div>
+
+                    <div class="booking__field">
+                        <label for="fWho">КОМУ НУЖНА ПОМОЩЬ</label>
+                        <select id="fWho" name="who">
+                            <option value="Мне самому/самой">Мне самому/самой</option>
+                            <option value="Маме">Маме</option>
+                            <option value="Папе">Папе</option>
+                            <option value="Бабушке / дедушке">Бабушке / дедушке</option>
+                            <option value="Другому близкому человеку">Другому близкому человеку</option>
+                        </select>
+                    </div>
+
+                    <div class="booking__field">
+                        <label for="fDistrict">РАЙОН ВЫЕЗДА</label>
+                        <select id="fDistrict" name="district">
+                            <option value="Лабинск">Лабинск (без доплаты)</option>
+                            <option value="Лабинский район">Лабинский район (+300 ₽)</option>
+                            <option value="Курганинск">Курганинск (+300 ₽)</option>
+                            <option value="Мостовской">Мостовской (+300 ₽)</option>
+                            <option value="Отрадная">Отрадная (+500 ₽)</option>
+                            <option value="Другой населённый пункт">Другой населённый пункт</option>
+                        </select>
+                    </div>
+
+                    <div class="booking__field">
+                        <label for="fProblem">ВОПРОСЫ ИЛИ ПРОБЛЕМЫ <span class="req">*</span></label>
+                        <textarea id="fProblem" name="problem" rows="4" required maxlength="1000"
+                                  placeholder="Например: мама не может установить WhatsApp, нужно записать её на Госуслуги и защитить от звонков мошенников"></textarea>
+                    </div>
+
+                    <div class="booking__field">
+                        <label for="fTime">УДОБНОЕ ВРЕМЯ ВИЗИТА (необязательно)</label>
+                        <input type="text" id="fTime" name="time" placeholder="Например: будни после 15:00 или выходные" maxlength="100">
+                    </div>
+
+                    <div class="booking__status" id="bookingStatus" hidden></div>
+
+                    <button type="submit" class="btn btn--primary btn--big booking__submit" id="bookingSubmit">
+                        ОТПРАВИТЬ ЗАЯВКУ <span class="btn__icon">▶</span>
+                    </button>
+
+                    <p class="booking__note">
+                        Или сразу напишите нам:
+                        <a href="https://wa.me/79604792729?text=Здравствуйте!%20Пишу%20с%20сайта%20Kogniv.%20Я%20из%20Лабинска.%20Хочу%20записаться%20на%20визит" target="_blank" rel="noopener">WhatsApp</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="faq section" id="faq">
+        <div class="container faq__container">
+            <h2 class="section__title"><span class="accent">//</span> ЧАСТЫЕ ВОПРОСЫ</h2>
+            <div class="faq__list">
+                <details class="faq__item panel">
+                    <summary class="faq__question">Выезжаете ли вы за пределы Лабинска?</summary>
+                    <p class="faq__answer">Да! Работаем по всему Лабинску и ближайшим хуторам без доплаты. Выезд в Курганинск, Мостовской, Отрадную и по району — +300 ₽ к стоимости визита (дорога). В Отрадную — +500 ₽.</p>
+                </details>
+                <details class="faq__item panel">
+                    <summary class="faq__question">Это безопасно? Кто приедет к маме?</summary>
+                    <p class="faq__answer">Я живу в Лабинске, работаю под своим именем — меня можно встретить на улице. Перед визитом отправляю вам свои данные и время приезда. После визита — фотоотчёт в WhatsApp. Работаю официально.</p>
+                </details>
+                <details class="faq__item panel">
+                    <summary class="faq__question">Сколько длится визит?</summary>
+                    <p class="faq__answer">Обычно от 1 до 2 часов в зависимости от задачи. Мы не торопимся: главное — чтобы ваш близкий человек всё понял и запомнил.</p>
+                </details>
+                <details class="faq__item panel">
+                    <summary class="faq__question">А если не получится научить?</summary>
+                    <p class="faq__answer">Приезжаю повторно бесплатно. Мой принцип: не научил — верну деньги.</p>
+                </details>
+                <details class="faq__item panel">
+                    <summary class="faq__question">Можно оплатить после визита?</summary>
+                    <p class="faq__answer">Да, оплата только после выполнения работы и вашего подтверждения, что всё в порядке. Наличными или переводом.</p>
+                </details>
+                <details class="faq__item panel">
+                    <summary class="faq__question">Родители живут в Лабинске, а я — в другом городе. Поможете?</summary>
+                    <p class="faq__answer">Конечно! Это самый частый запрос: дети уехали в Краснодар или Москву, а родители здесь. Вы заказываете и оплачиваете визит удалённо, а после каждого визита получаете фотоотчёт о проделанной работе.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ФУТЕР ================= -->
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div class="footer__top">
+                <a href="#" class="logo logo--full">
+                    <span class="logo__icon-wrap">
+                        <span class="logo__ring" aria-hidden="true"></span>
+                        <img src="assets/icon.svg" alt="Kogniv" class="logo__icon">
+                    </span>
+                    <span class="logo__name">KOGNIV</span>
+                </a>
+                <a href="tel:+79604792729" class="footer__phone">8 (999) 123-45-67</a>
+            </div>
+            <div class="footer__links">
+                <a href="https://wa.me/79604792729" target="_blank" rel="noopener">WhatsApp</a>
+                <span class="footer__sep">•</span>
+                <a href="https://avito.ru" target="_blank" rel="noopener">Авито</a>
+                <span class="footer__sep">•</span>
+                <span>Лабинск • Лабинский район • Курганинск • Мостовской</span>
+            </div>
+            <div class="footer__shield">🛡 Мошенникам здесь не место</div>
+            <div class="footer__copy">© 2026 Kogniv Лабинск — Подключаем ваших близких к цифровой жизни</div>
+        </div>
+    </footer>
+
+    <!-- ================= ПЛАВАЮЩАЯ КНОПКА (мобилки) ================= -->
+    <a href="tel:+79604792729" class="floating-call" id="floatingCall" aria-label="Позвонить">
+        <span>📞</span> ВЫЗВАТЬ
+    </a>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
