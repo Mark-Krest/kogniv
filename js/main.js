@@ -4,7 +4,8 @@
 
 /* ---------- КОНФИГ ---------- */
 const CONFIG = {
-    // URL веб-приложения Google Apps Script
+    // URL веб-приложения Google Apps Script.
+    // Если оставить заглушку — форма будет отправлять через WhatsApp.
     endpoint: 'https://script.google.com/macros/s/AKfycbwvLs2lD4QHb3WmHGadxmg-U5QdcJq_rLqOnOJAOd23g3aUsd1T45psKasMA7rfPwA/exec'
 };
 
@@ -202,6 +203,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusBox = document.getElementById('bookingStatus');
     const submitBtn = document.getElementById('bookingSubmit');
 
+    if (!form) return; // формы нет на странице — остальной код выше уже отработал
+
+    // Безопасное чтение значения поля: если поля нет — вернёт пустую строку,
+    // чтобы одна ошибка в HTML не ломала всю форму
+    function val(id) {
+        const el = document.getElementById(id);
+        return el ? el.value.trim() : '';
+    }
+
     function showStatus(text, type) {
         statusBox.hidden = false;
         statusBox.textContent = text;
@@ -214,15 +224,15 @@ document.addEventListener('DOMContentLoaded', () => {
         let ok = true;
         form.querySelectorAll('.input--error').forEach(el => el.classList.remove('input--error'));
 
-        if (!data.name || data.name.trim().length < 2) {
+        if (data.name.length < 2) {
             document.getElementById('fName').classList.add('input--error');
             ok = false;
         }
-        if (!data.phone || data.phone.replace(/\D/g, '').length < 10) {
+        if (data.phone.replace(/\D/g, '').length < 10) {
             document.getElementById('fPhone').classList.add('input--error');
             ok = false;
         }
-        if (!data.problem || data.problem.trim().length < 5) {
+        if (data.problem.length < 5) {
             document.getElementById('fProblem').classList.add('input--error');
             ok = false;
         }
@@ -245,13 +255,13 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         const data = {
-            name: document.getElementById('fName').value.trim(),
-            phone: document.getElementById('fPhone').value.trim(),
-            who: document.getElementById('fWho').value,
-            plan: document.getElementById('fPlan').value,
-            district: document.getElementById('fDistrict').value,
-            problem: document.getElementById('fProblem').value.trim(),
-            time: document.getElementById('fTime').value.trim()
+            name: val('fName'),
+            phone: val('fPhone'),
+            who: val('fWho') || 'Не указано',
+            plan: val('fPlan') || 'Пока не выбран',
+            district: val('fDistrict') || 'Лабинск',
+            problem: val('fProblem'),
+            time: val('fTime')
         };
 
         if (!validate(data)) {
@@ -287,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     source: 'сайт kogniv'
                 }).toString()
             });
-            // При no-cors мы не видим ответ сервера, но если fetch не упал —
+            // При no-cors ответ сервера не читается, но если fetch не упал —
             // запрос доставлен. Считаем успехом.
             showStatus('✓ Заявка принята! Перезвоним вам в течение 15 минут. Если не перезвонили — позвоните нам сами.', 'ok');
             form.reset();
