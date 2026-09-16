@@ -15,7 +15,6 @@
 </head>
 <body>
 
-    
     <!-- ================= ПРЕЛОАДЕР ================= -->
     <div class="preloader" id="preloader">
         <span class="logo__icon-wrap logo__icon-wrap--preloader">
@@ -47,8 +46,8 @@
                 <a href="#faq" class="nav__link">Вопросы</a>
             </nav>
             <div class="header__actions">
-                <a href="tel:+79604792729" class="header__phone">8 (999) 123-45-67</a>
-                <a href="https://wa.me/79604792729?text=Здравствуйте!%20Пишу%20с%20сайта%20Kogniv.%20Я%20из%20Лабинска.%20Нужна%20помощь%20с%20телефоном%20для%20близкого%20человека"
+                <a href="tel:+79991234567" class="header__phone">8 (999) 123-45-67</a>
+                <a href="https://wa.me/79991234567?text=Здравствуйте!%20Пишу%20с%20сайта%20Kogniv.%20Я%20из%20Лабинска.%20Нужна%20помощь%20с%20телефоном%20для%20близкого%20человека"
                    class="btn btn--wa btn--small" target="_blank" rel="noopener">
                     WhatsApp <span class="btn__icon">⚡</span>
                 </a>
@@ -74,8 +73,8 @@
                 всё настроит и научит пользоваться.
             </p>
             <div class="hero__buttons">
-                <a href="#booking" class="btn btn--primary">ЗАПИСАТЬСЯ <span class="btn__icon">▶</span></a>
-                <a href="https://wa.me/79604792729?text=Здравствуйте!%20Пишу%20с%20сайта%20Kogniv.%20Я%20из%20Лабинска.%20Нужна%20помощь%20с%20телефоном%20для%20близкого%20человека"
+                <a href="#pricing" class="btn btn--primary">ВЫБРАТЬ ТАРИФ <span class="btn__icon">▶</span></a>
+                <a href="https://wa.me/79991234567?text=Здравствуйте!%20Пишу%20с%20сайта%20Kogniv.%20Я%20из%20Лабинска.%20Нужна%20помощь%20с%20телефоном%20для%20близкого%20человека"
                    class="btn btn--wa" target="_blank" rel="noopener">НАПИСАТЬ В WHATSAPP</a>
             </div>
         </div>
@@ -186,7 +185,7 @@
             </div>
             <div class="cases__cta">
                 <p>Узнали ситуацию? Это решается за один визит.</p>
-                <a href="#booking" class="btn btn--primary">ЗАПИСАТЬСЯ НА ВИЗИТ <span class="btn__icon">▶</span></a>
+                <a href="#pricing" class="btn btn--primary">ВЫБРАТЬ ТАРИФ <span class="btn__icon">▶</span></a>
             </div>
         </div>
     </section>
@@ -243,31 +242,34 @@
             <div class="how__steps">
                 <div class="how__step">
                     <div class="how__num">01</div>
-                    <h3 class="how__title">Заявка</h3>
-                    <p>Форма ниже, звонок или WhatsApp. Уточним задачу и подберём время</p>
+                    <h3 class="how__title">Тариф</h3>
+                    <p>Выберите подходящий тариф — кликните на карточку ниже</p>
                 </div>
                 <div class="how__line" aria-hidden="true"></div>
                 <div class="how__step">
                     <div class="how__num">02</div>
-                    <h3 class="how__title">Визит</h3>
-                    <p>Мастер приезжает домой, всё настраивает и обучает простыми словами</p>
+                    <h3 class="how__title">Заявка</h3>
+                    <p>Заполните форму — перезвоним в течение 15 минут</p>
                 </div>
                 <div class="how__line" aria-hidden="true"></div>
                 <div class="how__step">
                     <div class="how__num">03</div>
-                    <h3 class="how__title">Результат</h3>
-                    <p>Всё работает! Фотоотчёт вам в WhatsApp + памятка-шпаргалка родителям</p>
+                    <h3 class="how__title">Визит</h3>
+                    <p>Мастер приедет, всё настроит, обучит и отправит вам фотоотчёт</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ================= ТАРИФЫ ================= -->
+    <!-- ================= ТАРИФЫ (выбор кликом) ================= -->
     <section class="pricing section" id="pricing">
         <div class="container">
-            <h2 class="section__title"><span class="accent">//</span> ТАРИФЫ</h2>
-            <div class="pricing__grid">
-                <article class="price-card panel">
+            <h2 class="section__title"><span class="accent">//</span> ШАГ 1 — ВЫБЕРИТЕ ТАРИФ</h2>
+            <p class="pricing__hint">Нажмите на карточку — тариф подставится в заявку автоматически</p>
+            <div class="pricing__grid" id="pricingGrid">
+
+                <article class="price-card panel price-card--selectable" data-plan="Разовый (990 ₽)">
+                    <span class="price-card__check" aria-hidden="true">✓</span>
                     <h3 class="price-card__name">РАЗОВЫЙ</h3>
                     <div class="price-card__value">990 ₽</div>
                     <ul class="price-card__list">
@@ -276,10 +278,12 @@
                         <li>Памятка-шпаргалка в подарок</li>
                         <li>Оплата после визита</li>
                     </ul>
-                    <a href="#booking" class="btn btn--ghost">ВЫБРАТЬ</a>
+                    <span class="price-card__select-btn">ВЫБРАТЬ ЭТОТ ТАРИФ</span>
                 </article>
-                <article class="price-card panel price-card--featured">
+
+                <article class="price-card panel price-card--selectable price-card--featured" data-plan="Оптимальный (1 900 ₽)">
                     <span class="price-card__badge">ПОПУЛЯРНЫЙ</span>
+                    <span class="price-card__check" aria-hidden="true">✓</span>
                     <h3 class="price-card__name">ОПТИМАЛЬНЫЙ</h3>
                     <div class="price-card__value">1 900 ₽</div>
                     <ul class="price-card__list">
@@ -288,9 +292,11 @@
                         <li>Обучение + шпаргалка</li>
                         <li>2 недели поддержки по телефону</li>
                     </ul>
-                    <a href="#booking" class="btn btn--primary">ВЫБРАТЬ</a>
+                    <span class="price-card__select-btn">ВЫБРАТЬ ЭТОТ ТАРИФ</span>
                 </article>
-                <article class="price-card panel">
+
+                <article class="price-card panel price-card--selectable" data-plan="Подключён (3 000 ₽/мес)">
+                    <span class="price-card__check" aria-hidden="true">✓</span>
                     <h3 class="price-card__name">ПОДКЛЮЧЁН</h3>
                     <div class="price-card__value">3 000 ₽<span class="price-card__period">/мес</span></div>
                     <ul class="price-card__list">
@@ -299,21 +305,31 @@
                         <li>Приоритетный выезд</li>
                         <li>Отчёты детям после каждого визита</li>
                     </ul>
-                    <a href="#booking" class="btn btn--ghost">ВЫБРАТЬ</a>
+                    <span class="price-card__select-btn">ВЫБРАТЬ ЭТОТ ТАРИФ</span>
                 </article>
+
             </div>
             <p class="pricing__note">// По Лабинску выезд бесплатно. Курганинск, Мостовской, Отрадная и по району — +300 ₽</p>
+            <div class="pricing__error" id="pricingError" hidden>
+                ⚠ Сначала выберите тариф — нажмите на одну из карточек выше
+            </div>
         </div>
     </section>
 
-    <!-- ================= ОТЗЫВЫ ================= -->
-    
     <!-- ================= ЗАПИСЬ (ФОРМА) ================= -->
     <section class="booking section" id="booking">
         <div class="container">
             <div class="booking__box panel">
-                <span class="panel__tag">// НОВАЯ ЗАЯВКА</span>
+                <span class="panel__tag">// ШАГ 2 — ЗАЯВКА</span>
                 <h2 class="section__title booking__title">ЗАПИСАТЬСЯ НА ВИЗИТ</h2>
+
+                <!-- Плашка выбранного тарифа -->
+                <div class="booking__plan" id="bookingPlan" hidden>
+                    <span class="booking__plan-label">ВАШ ТАРИФ:</span>
+                    <span class="booking__plan-value" id="bookingPlanValue">—</span>
+                    <a href="#pricing" class="booking__plan-change">изменить</a>
+                </div>
+
                 <p class="booking__subtitle">Опишите ситуацию — перезвоним в течение 15 минут и подберём удобное время. Работаем по Лабинску и району</p>
 
                 <form class="booking__form" id="bookingForm" novalidate>
@@ -370,7 +386,7 @@
 
                     <p class="booking__note">
                         Или сразу напишите нам:
-                        <a href="https://wa.me/79604792729?text=Здравствуйте!%20Пишу%20с%20сайта%20Kogniv.%20Я%20из%20Лабинска.%20Хочу%20записаться%20на%20визит" target="_blank" rel="noopener">WhatsApp</a>
+                        <a href="https://wa.me/79991234567?text=Здравствуйте!%20Пишу%20с%20сайта%20Kogniv.%20Я%20из%20Лабинска.%20Хочу%20записаться%20на%20визит" target="_blank" rel="noopener">WhatsApp</a>
                     </p>
                 </form>
             </div>
@@ -421,10 +437,12 @@
                     </span>
                     <span class="logo__name">KOGNIV</span>
                 </a>
-                <a href="tel:+79604792729" class="footer__phone">8 (999) 123-45-67</a>
+                <a href="tel:+79991234567" class="footer__phone">8 (999) 123-45-67</a>
             </div>
             <div class="footer__links">
-                <a href="https://wa.me/79604792729" target="_blank" rel="noopener">WhatsApp</a>
+                <a href="https://wa.me/79991234567" target="_blank" rel="noopener">WhatsApp</a>
+                <span class="footer__sep">•</span>
+                <a href="https://t.me/kogniv" target="_blank" rel="noopener">Telegram</a>
                 <span class="footer__sep">•</span>
                 <a href="https://avito.ru" target="_blank" rel="noopener">Авито</a>
                 <span class="footer__sep">•</span>
@@ -436,7 +454,7 @@
     </footer>
 
     <!-- ================= ПЛАВАЮЩАЯ КНОПКА (мобилки) ================= -->
-    <a href="tel:+79604792729" class="floating-call" id="floatingCall" aria-label="Позвонить">
+    <a href="tel:+79991234567" class="floating-call" id="floatingCall" aria-label="Позвонить">
         <span>📞</span> ВЫЗВАТЬ
     </a>
 
