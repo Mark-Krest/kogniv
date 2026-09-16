@@ -1,463 +1,353 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kogniv Лабинск — Настроим телефон вашим родителям за один визит</title>
-    <meta name="description" content="Kogniv Лабинск: помощь пожилым с телефоном. WhatsApp, Госуслуги, оплата ЖКХ. Мастер приедет домой, всё настроит и научит. Защита от мошенников. Выезд по Лабинску и району.">
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="apple-touch-icon" href="assets/icon.svg">
-    <meta name="theme-color" content="#0B0C10">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+/* ============================================
+   KOGNIV — вся логика сайта
+   ============================================ */
 
-    <!-- ================= ПРЕЛОАДЕР ================= -->
-    <div class="preloader" id="preloader">
-        <span class="logo__icon-wrap logo__icon-wrap--preloader">
-            <span class="logo__ring" aria-hidden="true"></span>
-            <img src="assets/icon.svg" alt="Kogniv" class="preloader__icon">
-        </span>
-        <div class="preloader__logo">KOGNIV</div>
-        <div class="preloader__bar">
-            <div class="preloader__bar-fill" id="preloaderBar"></div>
-        </div>
-        <div class="preloader__status" id="preloaderStatus">ЗАГРУЗКА СИСТЕМЫ...</div>
-    </div>
+/* ---------- КОНФИГ ---------- */
+const CONFIG = {
+    // URL веб-приложения Google Apps Script.
+    // Если оставить заглушку — форма будет отправлять через WhatsApp.
+    endpoint: 'https://script.google.com/macros/s/ТВОЙ_URL/exec'
+};
 
-    <!-- ================= ШАПКА ================= -->
-    <header class="header" id="header">
-        <div class="container header__inner">
-            <a href="#" class="logo logo--full">
-                <span class="logo__icon-wrap">
-                    <span class="logo__ring" aria-hidden="true"></span>
-                    <img src="assets/icon.svg" alt="Kogniv" class="logo__icon">
-                </span>
-                <span class="logo__name">KOGNIV</span>
-            </a>
-            <nav class="nav" id="nav">
-                <a href="#cases" class="nav__link">Ситуации</a>
-                <a href="#services" class="nav__link">Услуги</a>
-                <a href="#how" class="nav__link">Как работаем</a>
-                <a href="#pricing" class="nav__link">Цены</a>
-                <a href="#faq" class="nav__link">Вопросы</a>
-            </nav>
-            <div class="header__actions">
-                <a href="tel:+79991234567" class="header__phone">8 (999) 123-45-67</a>
-                <a href="https://wa.me/79991234567?text=Здравствуйте!%20Пишу%20с%20сайта%20Kogniv.%20Я%20из%20Лабинска.%20Нужна%20помощь%20с%20телефоном%20для%20близкого%20человека"
-                   class="btn btn--wa btn--small" target="_blank" rel="noopener">
-                    WhatsApp <span class="btn__icon">⚡</span>
-                </a>
-                <button class="burger" id="burger" aria-label="Меню">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
-        </div>
-    </header>
+const WHATSAPP_PHONE = '79991234567';
 
-    <!-- ================= HERO ================= -->
-    <section class="hero" id="hero">
-        <div class="hero__grid-bg" aria-hidden="true"></div>
-        <div class="container hero__inner">
-            <p class="hero__system">/// СИСТЕМА ПОМОЩИ АКТИВИРОВАНА /// ЛАБИНСК</p>
-            <h1 class="hero__title">
-                <span class="typewriter" id="typewriter"
-                      data-text="ВКЛЮЧИМ ТЕЛЕФОН ВАШИХ РОДИТЕЛЕЙ ЗА ОДИН ВИЗИТ"></span>
-            </h1>
-            <p class="hero__subtitle">
-                Лабинск и район • WhatsApp • Госуслуги • оплата ЖКХ —
-                без нервов и сложных слов. Мастер Kogniv приедет домой,
-                всё настроит и научит пользоваться.
-            </p>
-            <div class="hero__buttons">
-                <a href="#pricing" class="btn btn--primary">ВЫБРАТЬ ТАРИФ <span class="btn__icon">▶</span></a>
-                <a href="https://wa.me/79991234567?text=Здравствуйте!%20Пишу%20с%20сайта%20Kogniv.%20Я%20из%20Лабинска.%20Нужна%20помощь%20с%20телефоном%20для%20близкого%20человека"
-                   class="btn btn--wa" target="_blank" rel="noopener">НАПИСАТЬ В WHATSAPP</a>
-            </div>
-        </div>
-        <div class="marquee" aria-hidden="true">
-            <div class="marquee__track">
-                <span>лабинск /// настройка смартфона /// защита от мошенников /// госуслуги /// whatsapp и видеосвязь /// оплата жкх /// терпение и простые слова /// выезд по району /// лабинск /// настройка смартфона /// защита от мошенников /// госуслуги /// whatsapp и видеосвязь /// оплата жкх /// терпение и простые слова /// выезд по району ///</span>
-            </div>
-        </div>
-    </section>
+document.addEventListener('DOMContentLoaded', () => {
 
-    <!-- ================= ПРОБЛЕМА ================= -->
-    <section class="problem section">
-        <div class="container">
-            <div class="problem__quote panel">
-                <span class="panel__tag panel__tag--danger">// ВХОДЯЩИЙ СИГНАЛ</span>
-                <p class="problem__text">
-                    «Мама <b>3 часа</b> не могла отправить фото внуку.
-                    А мошенники позвонили ей <b>4 раза</b> на этой неделе»
-                </p>
-            </div>
-            <div class="stats">
-                <div class="stat panel">
-                    <div class="stat__num" data-target="87" data-suffix="%">0%</div>
-                    <div class="stat__label">мошеннических звонков нацелены на пожилых</div>
-                </div>
-                <div class="stat panel">
-                    <div class="stat__num" data-target="1" data-prefix="1 из " data-suffix="3">0</div>
-                    <div class="stat__label">пенсионеров не может самостоятельно оплатить ЖКХ</div>
-                </div>
-                <div class="stat panel">
-                    <div class="stat__num" data-target="15" data-suffix=" мин">0</div>
-                    <div class="stat__label">— и мы перезвоним вам после заявки</div>
-                </div>
-            </div>
-        </div>
-    </section>
+    /* ---------- 1. Прелоадер ---------- */
+    const preloader = document.getElementById('preloader');
+    const bar = document.getElementById('preloaderBar');
+    const status = document.getElementById('preloaderStatus');
 
-    <!-- ================= ЗНАКОМЫЕ СИТУАЦИИ ================= -->
-    <section class="cases section" id="cases">
-        <div class="container">
-            <h2 class="section__title"><span class="accent">//</span> ЗНАКОМЫЕ СИТУАЦИИ?</h2>
-            <p class="cases__subtitle">С этим к нам обращаются каждый день. Узнаёте своих близких?</p>
-            <div class="cases__grid">
+    const messages = ['ЗАГРУЗКА СИСТЕМЫ...', 'ПОДКЛЮЧЕНИЕ К СЕТИ...', 'ПОИСК МАСТЕРА...', 'ГОТОВО ✓'];
+    let progress = 0;
+    let msgIndex = 0;
 
-                <article class="case panel">
-                    <div class="case__header">
-                        <span class="case__icon">📞</span>
-                        <span class="case__title">ЗВОНОК НЕИЗВЕСТНОГО</span>
-                        <span class="case__time">11:42</span>
-                    </div>
-                    <div class="case__bubble case__bubble--in">
-                        «Здравствуйте, служба безопасности банка! С вашей карты пытаются списать деньги...»
-                    </div>
-                    <div class="case__bubble case__bubble--out">
-                        Мама переводит 150 000 ₽ на «безопасный счёт» 😰
-                    </div>
-                    <div class="case__solve">🛡 Мы настроим фильтры и научим главному правилу: <b>банк никогда не просит переводы</b></div>
-                </article>
+    const loaderInterval = setInterval(() => {
+        progress = Math.min(progress + Math.random() * 25 + 10, 100);
+        bar.style.width = progress + '%';
 
-                <article class="case panel">
-                    <div class="case__header">
-                        <span class="case__icon">💬</span>
-                        <span class="case__title">WHATSAPP</span>
-                        <span class="case__time">18:05</span>
-                    </div>
-                    <div class="case__bubble case__bubble--in">
-                        «Мам, ну нажми на зелёную камеру сверху!»
-                    </div>
-                    <div class="case__bubble case__bubble--in">
-                        «МАМ, НЕ ИМЕННО ЭТУ»
-                    </div>
-                    <div class="case__bubble case__bubble--out">
-                        «Внучка, давай завтра, я боюсь что-то сломать» 😔
-                    </div>
-                    <div class="case__solve">📷 Научим видеозвонкам за один визит — и внуков увидите каждый вечер</div>
-                </article>
+        const nextMsg = Math.floor(progress / 26);
+        if (nextMsg > msgIndex && nextMsg < messages.length) {
+            msgIndex = nextMsg;
+            status.textContent = messages[msgIndex];
+        }
 
-                <article class="case panel">
-                    <div class="case__header">
-                        <span class="case__icon">🏥</span>
-                        <span class="case__title">ПОЛИКЛИНИКА</span>
-                        <span class="case__time">08:15</span>
-                    </div>
-                    <div class="case__bubble case__bubble--in">
-                        Очередь к терапевту с 6 утра. Талончик — только через Госуслуги
-                    </div>
-                    <div class="case__bubble case__bubble--out">
-                        «Я туда не дойду, посижу — авось достанется» 😟
-                    </div>
-                    <div class="case__solve">🏥 Зарегистрируем на Госуслугах и оставим шпаргалку: запись к врачу в 3 нажатия</div>
-                </article>
+        if (progress >= 100) {
+            clearInterval(loaderInterval);
+            setTimeout(() => {
+                preloader.classList.add('preloader--hidden');
+                startTypewriter();
+            }, 400);
+        }
+    }, 250);
 
-                <article class="case panel">
-                    <div class="case__header">
-                        <span class="case__icon">🧾</span>
-                        <span class="case__title">ЖКХ</span>
-                        <span class="case__time">25-е число</span>
-                    </div>
-                    <div class="case__bubble case__bubble--in">
-                        Квитанции лежат на столе. Стоять в очереди на почте — весь день
-                    </div>
-                    <div class="case__bubble case__bubble--out">
-                        «А соседке отключили свет, не успела заплатить» 😧
-                    </div>
-                    <div class="case__solve">🏠 Настроим оплату в пару нажатий — квитанции больше не страшны</div>
-                </article>
+    /* ---------- 2. Печатная машинка ---------- */
+    function startTypewriter() {
+        const el = document.getElementById('typewriter');
+        if (!el) return;
+        const text = el.dataset.text;
+        let i = 0;
+        el.textContent = '';
 
-            </div>
-            <div class="cases__cta">
-                <p>Узнали ситуацию? Это решается за один визит.</p>
-                <a href="#pricing" class="btn btn--primary">ВЫБРАТЬ ТАРИФ <span class="btn__icon">▶</span></a>
-            </div>
-        </div>
-    </section>
+        (function type() {
+            if (i < text.length) {
+                el.textContent += text[i];
+                i++;
+                setTimeout(type, 45);
+            }
+        })();
+    }
 
-    <!-- ================= УСЛУГИ ================= -->
-    <section class="services section" id="services">
-        <div class="container">
-            <h2 class="section__title"><span class="accent">//</span> ЧТО МЫ СДЕЛАЕМ</h2>
-            <div class="services__grid">
-                <article class="service-card panel">
-                    <span class="service-card__num">001</span>
-                    <div class="service-card__icon">💬</div>
-                    <h3 class="service-card__title">WhatsApp и видеосвязь</h3>
-                    <p>Научим звонить по видео, отправлять фото и голосовые сообщения внукам</p>
-                </article>
-                <article class="service-card panel">
-                    <span class="service-card__num">002</span>
-                    <div class="service-card__icon">🏥</div>
-                    <h3 class="service-card__title">Госуслуги и запись к врачу</h3>
-                    <p>Регистрация на портале, подтверждение аккаунта, запись в поликлинику</p>
-                </article>
-                <article class="service-card panel">
-                    <span class="service-card__num">003</span>
-                    <div class="service-card__icon">🏠</div>
-                    <h3 class="service-card__title">Оплата ЖКХ и счетов</h3>
-                    <p>Настроим оплату квартплаты, налогов и штрафов в пару нажатий</p>
-                </article>
-                <article class="service-card panel service-card--danger">
-                    <span class="service-card__num">004</span>
-                    <div class="service-card__icon">🛡</div>
-                    <h3 class="service-card__title">Защита от мошенников</h3>
-                    <p>Настроим фильтры спама и объясним, как распознать обманщиков</p>
-                </article>
-                <article class="service-card panel">
-                    <span class="service-card__num">005</span>
-                    <div class="service-card__icon">📷</div>
-                    <h3 class="service-card__title">Перенос фото и контактов</h3>
-                    <p>Перенесём всё со старого телефона на новый — ничего не потеряется</p>
-                </article>
-                <article class="service-card panel">
-                    <span class="service-card__num">006</span>
-                    <div class="service-card__icon">📺</div>
-                    <h3 class="service-card__title">ТВ и интернет</h3>
-                    <p>Настроим Smart TV, каналы, Wi-Fi и подключение новых устройств</p>
-                </article>
-            </div>
-        </div>
-    </section>
+    /* ---------- 3. Анимация статистики ---------- */
+    const statNums = document.querySelectorAll('.stat__num');
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateStat(entry.target);
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
 
-    <!-- ================= КАК РАБОТАЕМ ================= -->
-    <section class="how section" id="how">
-        <div class="container">
-            <h2 class="section__title"><span class="accent">//</span> КАК ЭТО РАБОТАЕТ</h2>
-            <div class="how__steps">
-                <div class="how__step">
-                    <div class="how__num">01</div>
-                    <h3 class="how__title">Тариф</h3>
-                    <p>Выберите подходящий тариф — кликните на карточку ниже</p>
-                </div>
-                <div class="how__line" aria-hidden="true"></div>
-                <div class="how__step">
-                    <div class="how__num">02</div>
-                    <h3 class="how__title">Заявка</h3>
-                    <p>Заполните форму — перезвоним в течение 15 минут</p>
-                </div>
-                <div class="how__line" aria-hidden="true"></div>
-                <div class="how__step">
-                    <div class="how__num">03</div>
-                    <h3 class="how__title">Визит</h3>
-                    <p>Мастер приедет, всё настроит, обучит и отправит вам фотоотчёт</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    statNums.forEach(num => statsObserver.observe(num));
 
-    <!-- ================= ТАРИФЫ (выбор кликом) ================= -->
-    <section class="pricing section" id="pricing">
-        <div class="container">
-            <h2 class="section__title"><span class="accent">//</span> ШАГ 1 — ВЫБЕРИТЕ ТАРИФ</h2>
-            <p class="pricing__hint">Нажмите на карточку — тариф подставится в заявку автоматически</p>
-            <div class="pricing__grid" id="pricingGrid">
+    function animateStat(el) {
+        const targetVal = parseInt(el.dataset.target, 10);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        let val = 0;
+        const step = Math.max(1, Math.round(targetVal / 40));
 
-                <article class="price-card panel price-card--selectable" data-plan="Разовый (990 ₽)">
-                    <span class="price-card__check" aria-hidden="true">✓</span>
-                    <h3 class="price-card__name">РАЗОВЫЙ</h3>
-                    <div class="price-card__value">990 ₽</div>
-                    <ul class="price-card__list">
-                        <li>Выезд до 1 часа</li>
-                        <li>Любая одна задача</li>
-                        <li>Памятка-шпаргалка в подарок</li>
-                        <li>Оплата после визита</li>
-                    </ul>
-                    <span class="price-card__select-btn">ВЫБРАТЬ ЭТОТ ТАРИФ</span>
-                </article>
+        const timer = setInterval(() => {
+            val = Math.min(val + step, targetVal);
+            el.textContent = prefix + val + suffix;
+            if (val >= targetVal) clearInterval(timer);
+        }, 40);
+    }
 
-                <article class="price-card panel price-card--selectable price-card--featured" data-plan="Оптимальный (1 900 ₽)">
-                    <span class="price-card__badge">ПОПУЛЯРНЫЙ</span>
-                    <span class="price-card__check" aria-hidden="true">✓</span>
-                    <h3 class="price-card__name">ОПТИМАЛЬНЫЙ</h3>
-                    <div class="price-card__value">1 900 ₽</div>
-                    <ul class="price-card__list">
-                        <li>Выезд до 2 часов</li>
-                        <li>Сложные задачи: Госуслуги, банк</li>
-                        <li>Обучение + шпаргалка</li>
-                        <li>2 недели поддержки по телефону</li>
-                    </ul>
-                    <span class="price-card__select-btn">ВЫБРАТЬ ЭТОТ ТАРИФ</span>
-                </article>
+    /* ---------- 4. Шапка при скролле ---------- */
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('header--scrolled', window.scrollY > 50);
+    }, { passive: true });
 
-                <article class="price-card panel price-card--selectable" data-plan="Подключён (3 000 ₽/мес)">
-                    <span class="price-card__check" aria-hidden="true">✓</span>
-                    <h3 class="price-card__name">ПОДКЛЮЧЁН</h3>
-                    <div class="price-card__value">3 000 ₽<span class="price-card__period">/мес</span></div>
-                    <ul class="price-card__list">
-                        <li>4 визита в месяц</li>
-                        <li>Поддержка по телефону без лимита</li>
-                        <li>Приоритетный выезд</li>
-                        <li>Отчёты детям после каждого визита</li>
-                    </ul>
-                    <span class="price-card__select-btn">ВЫБРАТЬ ЭТОТ ТАРИФ</span>
-                </article>
+    /* ---------- 5. Мобильное меню ---------- */
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('nav');
 
-            </div>
-            <p class="pricing__note">// По Лабинску выезд бесплатно. Курганинск, Мостовской, Отрадная и по району — +300 ₽</p>
-            <div class="pricing__error" id="pricingError" hidden>
-                ⚠ Сначала выберите тариф — нажмите на одну из карточек выше
-            </div>
-        </div>
-    </section>
+    if (burger && nav) {
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('burger--open');
+            nav.classList.toggle('nav--open');
+        });
 
-    <!-- ================= ЗАПИСЬ (ФОРМА) ================= -->
-    <section class="booking section" id="booking">
-        <div class="container">
-            <div class="booking__box panel">
-                <span class="panel__tag">// ШАГ 2 — ЗАЯВКА</span>
-                <h2 class="section__title booking__title">ЗАПИСАТЬСЯ НА ВИЗИТ</h2>
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                burger.classList.remove('burger--open');
+                nav.classList.remove('nav--open');
+            });
+        });
+    }
 
-                <!-- Плашка выбранного тарифа -->
-                <div class="booking__plan" id="bookingPlan" hidden>
-                    <span class="booking__plan-label">ВАШ ТАРИФ:</span>
-                    <span class="booking__plan-value" id="bookingPlanValue">—</span>
-                    <a href="#pricing" class="booking__plan-change">изменить</a>
-                </div>
+    /* ---------- 6. Слайдер отзывов ---------- */
+    const track = document.getElementById('reviewsTrack');
+    if (track) {
+        const prevBtn = document.getElementById('revPrev');
+        const nextBtn = document.getElementById('revNext');
+        const dotsWrap = document.getElementById('revDots');
+        const reviews = track.children;
+        let slideIndex = 0;
 
-                <p class="booking__subtitle">Опишите ситуацию — перезвоним в течение 15 минут и подберём удобное время. Работаем по Лабинску и району</p>
+        function visibleCount() {
+            if (window.innerWidth <= 680) return 1;
+            if (window.innerWidth <= 960) return 2;
+            return 3;
+        }
 
-                <form class="booking__form" id="bookingForm" novalidate>
-                    <div class="booking__row">
-                        <div class="booking__field">
-                            <label for="fName">ВАШЕ ИМЯ <span class="req">*</span></label>
-                            <input type="text" id="fName" name="name" placeholder="Как к вам обращаться" required maxlength="60">
-                        </div>
-                        <div class="booking__field">
-                            <label for="fPhone">ТЕЛЕФОН <span class="req">*</span></label>
-                            <input type="tel" id="fPhone" name="phone" placeholder="+7 (___) ___-__-__" required maxlength="20">
-                        </div>
-                    </div>
+        function maxIndex() {
+            return Math.max(0, reviews.length - visibleCount());
+        }
 
-                    <div class="booking__field">
-                        <label for="fWho">КОМУ НУЖНА ПОМОЩЬ</label>
-                        <select id="fWho" name="who">
-                            <option value="Мне самому/самой">Мне самому/самой</option>
-                            <option value="Маме">Маме</option>
-                            <option value="Папе">Папе</option>
-                            <option value="Бабушке / дедушке">Бабушке / дедушке</option>
-                            <option value="Другому близкому человеку">Другому близкому человеку</option>
-                        </select>
-                    </div>
+        function buildDots() {
+            dotsWrap.innerHTML = '';
+            for (let i = 0; i <= maxIndex(); i++) {
+                const dot = document.createElement('button');
+                dot.className = 'reviews__dot' + (i === slideIndex ? ' reviews__dot--active' : '');
+                dot.setAttribute('aria-label', 'Отзыв ' + (i + 1));
+                dot.addEventListener('click', () => goTo(i));
+                dotsWrap.appendChild(dot);
+            }
+        }
 
-                    <div class="booking__field">
-                        <label for="fDistrict">РАЙОН ВЫЕЗДА</label>
-                        <select id="fDistrict" name="district">
-                            <option value="Лабинск">Лабинск (без доплаты)</option>
-                            <option value="Лабинский район">Лабинский район (+300 ₽)</option>
-                            <option value="Курганинск">Курганинск (+300 ₽)</option>
-                            <option value="Мостовской">Мостовской (+300 ₽)</option>
-                            <option value="Отрадная">Отрадная (+500 ₽)</option>
-                            <option value="Другой населённый пункт">Другой населённый пункт</option>
-                        </select>
-                    </div>
+        function updateSlider() {
+            slideIndex = Math.min(slideIndex, maxIndex());
+            const cardWidth = reviews[0].offsetWidth + 25;
+            track.style.transform = `translateX(-${slideIndex * cardWidth}px)`;
+            dotsWrap.querySelectorAll('.reviews__dot').forEach((d, i) => {
+                d.classList.toggle('reviews__dot--active', i === slideIndex);
+            });
+        }
 
-                    <div class="booking__field">
-                        <label for="fProblem">ВОПРОСЫ ИЛИ ПРОБЛЕМЫ <span class="req">*</span></label>
-                        <textarea id="fProblem" name="problem" rows="4" required maxlength="1000"
-                                  placeholder="Например: мама не может установить WhatsApp, нужно записать её на Госуслуги и защитить от звонков мошенников"></textarea>
-                    </div>
+        function goTo(i) {
+            slideIndex = i;
+            updateSlider();
+        }
 
-                    <div class="booking__field">
-                        <label for="fTime">УДОБНОЕ ВРЕМЯ ВИЗИТА (необязательно)</label>
-                        <input type="text" id="fTime" name="time" placeholder="Например: будни после 15:00 или выходные" maxlength="100">
-                    </div>
+        prevBtn.addEventListener('click', () => {
+            slideIndex = slideIndex > 0 ? slideIndex - 1 : maxIndex();
+            updateSlider();
+        });
 
-                    <div class="booking__status" id="bookingStatus" hidden></div>
+        nextBtn.addEventListener('click', () => {
+            slideIndex = slideIndex < maxIndex() ? slideIndex + 1 : 0;
+            updateSlider();
+        });
 
-                    <button type="submit" class="btn btn--primary btn--big booking__submit" id="bookingSubmit">
-                        ОТПРАВИТЬ ЗАЯВКУ <span class="btn__icon">▶</span>
-                    </button>
+        window.addEventListener('resize', () => {
+            buildDots();
+            updateSlider();
+        });
 
-                    <p class="booking__note">
-                        Или сразу напишите нам:
-                        <a href="https://wa.me/79991234567?text=Здравствуйте!%20Пишу%20с%20сайта%20Kogniv.%20Я%20из%20Лабинска.%20Хочу%20записаться%20на%20визит" target="_blank" rel="noopener">WhatsApp</a>
-                    </p>
-                </form>
-            </div>
-        </div>
-    </section>
+        buildDots();
+    }
 
-    <!-- ================= FAQ ================= -->
-    <section class="faq section" id="faq">
-        <div class="container faq__container">
-            <h2 class="section__title"><span class="accent">//</span> ЧАСТЫЕ ВОПРОСЫ</h2>
-            <div class="faq__list">
-                <details class="faq__item panel">
-                    <summary class="faq__question">Выезжаете ли вы за пределы Лабинска?</summary>
-                    <p class="faq__answer">Да! Работаем по всему Лабинску и ближайшим хуторам без доплаты. Выезд в Курганинск, Мостовской, Отрадную и по району — +300 ₽ к стоимости визита (дорога). В Отрадную — +500 ₽.</p>
-                </details>
-                <details class="faq__item panel">
-                    <summary class="faq__question">Это безопасно? Кто приедет к маме?</summary>
-                    <p class="faq__answer">Я живу в Лабинске, работаю под своим именем — меня можно встретить на улице. Перед визитом отправляю вам свои данные и время приезда. После визита — фотоотчёт в WhatsApp. Работаю официально.</p>
-                </details>
-                <details class="faq__item panel">
-                    <summary class="faq__question">Сколько длится визит?</summary>
-                    <p class="faq__answer">Обычно от 1 до 2 часов в зависимости от задачи. Мы не торопимся: главное — чтобы ваш близкий человек всё понял и запомнил.</p>
-                </details>
-                <details class="faq__item panel">
-                    <summary class="faq__question">А если не получится научить?</summary>
-                    <p class="faq__answer">Приезжаю повторно бесплатно. Мой принцип: не научил — верну деньги.</p>
-                </details>
-                <details class="faq__item panel">
-                    <summary class="faq__question">Можно оплатить после визита?</summary>
-                    <p class="faq__answer">Да, оплата только после выполнения работы и вашего подтверждения, что всё в порядке. Наличными или переводом.</p>
-                </details>
-                <details class="faq__item panel">
-                    <summary class="faq__question">Родители живут в Лабинске, а я — в другом городе. Поможете?</summary>
-                    <p class="faq__answer">Конечно! Это самый частый запрос: дети уехали в Краснодар или Москву, а родители здесь. Вы заказываете и оплачиваете визит удалённо, а после каждого визита получаете фотоотчёт о проделанной работе.</p>
-                </details>
-            </div>
-        </div>
-    </section>
+    /* ---------- 7. Плавающая кнопка ---------- */
+    const floatingCall = document.getElementById('floatingCall');
+    const hero = document.getElementById('hero');
 
-    <!-- ================= ФУТЕР ================= -->
-    <footer class="footer">
-        <div class="container footer__inner">
-            <div class="footer__top">
-                <a href="#" class="logo logo--full">
-                    <span class="logo__icon-wrap">
-                        <span class="logo__ring" aria-hidden="true"></span>
-                        <img src="assets/icon.svg" alt="Kogniv" class="logo__icon">
-                    </span>
-                    <span class="logo__name">KOGNIV</span>
-                </a>
-                <a href="tel:+79991234567" class="footer__phone">8 (999) 123-45-67</a>
-            </div>
-            <div class="footer__links">
-                <a href="https://wa.me/79991234567" target="_blank" rel="noopener">WhatsApp</a>
-                <span class="footer__sep">•</span>
-                <a href="https://t.me/kogniv" target="_blank" rel="noopener">Telegram</a>
-                <span class="footer__sep">•</span>
-                <a href="https://avito.ru" target="_blank" rel="noopener">Авито</a>
-                <span class="footer__sep">•</span>
-                <span>Лабинск • Лабинский район • Курганинск • Мостовской</span>
-            </div>
-            <div class="footer__shield">🛡 Мошенникам здесь не место</div>
-            <div class="footer__copy">© 2026 Kogniv Лабинск — Подключаем ваших близких к цифровой жизни</div>
-        </div>
-    </footer>
+    if (floatingCall && hero) {
+        window.addEventListener('scroll', () => {
+            const heroBottom = hero.offsetTop + hero.offsetHeight;
+            const show = window.scrollY > heroBottom * 0.6;
+            floatingCall.style.transform = show ? 'translateY(0)' : 'translateY(120px)';
+            floatingCall.style.transition = 'transform .3s ease';
+        }, { passive: true });
+    }
 
-    <!-- ================= ПЛАВАЮЩАЯ КНОПКА (мобилки) ================= -->
-    <a href="tel:+79991234567" class="floating-call" id="floatingCall" aria-label="Позвонить">
-        <span>📞</span> ВЫЗВАТЬ
-    </a>
+    /* ============================================================
+       8. ВЫБОР ТАРИФА — обязательный шаг
+       ============================================================ */
+    let selectedPlan = ''; // текущий выбранный тариф
 
-    <script src="js/main.js"></script>
-</body>
-</html>
+    const pricingGrid = document.getElementById('pricingGrid');
+    const pricingError = document.getElementById('pricingError');
+    const planBox = document.getElementById('bookingPlan');
+    const planValue = document.getElementById('bookingPlanValue');
+
+    function selectPlan(card) {
+        // Снимаем выделение со всех карточек
+        pricingGrid.querySelectorAll('.price-card--selected').forEach(c => {
+            c.classList.remove('price-card--selected');
+        });
+
+        // Выделяем выбранную
+        card.classList.add('price-card--selected');
+        selectedPlan = card.dataset.plan;
+
+        // Прячем ошибку, если была
+        if (pricingError) pricingError.hidden = true;
+
+        // Показываем плашку в форме
+        if (planBox && planValue) {
+            planValue.textContent = selectedPlan;
+            planBox.hidden = false;
+        }
+    }
+
+    if (pricingGrid) {
+        pricingGrid.querySelectorAll('.price-card--selectable').forEach(card => {
+            card.addEventListener('click', () => {
+                selectPlan(card);
+
+                // Плавно скроллим к форме, чтобы клиент продолжил оформление
+                setTimeout(() => {
+                    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+                }, 350);
+            });
+        });
+    }
+
+    /* ============================================================
+       9. ФОРМА ЗАПИСИ
+       ============================================================ */
+    const form = document.getElementById('bookingForm');
+    const statusBox = document.getElementById('bookingStatus');
+    const submitBtn = document.getElementById('bookingSubmit');
+
+    if (!form) return;
+
+    function val(id) {
+        const el = document.getElementById(id);
+        return el ? el.value.trim() : '';
+    }
+
+    function showStatus(text, type) {
+        statusBox.hidden = false;
+        statusBox.textContent = text;
+        statusBox.className = 'booking__status booking__status--' + type;
+        statusBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function validate(data) {
+        let ok = true;
+        form.querySelectorAll('.input--error').forEach(el => el.classList.remove('input--error'));
+
+        if (data.name.length < 2) {
+            document.getElementById('fName').classList.add('input--error');
+            ok = false;
+        }
+        if (data.phone.replace(/\D/g, '').length < 10) {
+            document.getElementById('fPhone').classList.add('input--error');
+            ok = false;
+        }
+        if (data.problem.length < 5) {
+            document.getElementById('fProblem').classList.add('input--error');
+            ok = false;
+        }
+        return ok;
+    }
+
+    function whatsappFallback(data) {
+        const text = 'Заявка с сайта Kogniv%0A' +
+            'Тариф: ' + encodeURIComponent(data.plan) + '%0A' +
+            'Имя: ' + encodeURIComponent(data.name) + '%0A' +
+            'Телефон: ' + encodeURIComponent(data.phone) + '%0A' +
+            'Кому помощь: ' + encodeURIComponent(data.who) + '%0A' +
+            'Район: ' + encodeURIComponent(data.district) + '%0A' +
+            'Проблема: ' + encodeURIComponent(data.problem) + '%0A' +
+            'Время: ' + encodeURIComponent(data.time || 'любое');
+        window.open('https://wa.me/' + WHATSAPP_PHONE + '?text=' + text, '_blank');
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        /* --- ПРОВЕРКА: тариф выбран? --- */
+        if (!selectedPlan) {
+            if (pricingError) {
+                pricingError.hidden = false;
+                // Перезапуск анимации дрожания
+                pricingError.style.animation = 'none';
+                void pricingError.offsetWidth;
+                pricingError.style.animation = '';
+            }
+            document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+            return;
+        }
+
+        const data = {
+            plan: selectedPlan,
+            name: val('fName'),
+            phone: val('fPhone'),
+            who: val('fWho') || 'Не указано',
+            district: val('fDistrict') || 'Лабинск',
+            problem: val('fProblem'),
+            time: val('fTime')
+        };
+
+        if (!validate(data)) {
+            showStatus('Проверьте выделенные поля — они заполнены неверно.', 'err');
+            return;
+        }
+
+        // Нет настроенного скрипта — отправляем через WhatsApp
+        if (!CONFIG.endpoint || CONFIG.endpoint.includes('ТВОЙ_URL')) {
+            showStatus('Заявка почти готова! Сейчас откроется WhatsApp — просто нажмите «отправить».', 'ok');
+            whatsappFallback(data);
+            form.reset();
+            return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'ОТПРАВЛЯЕМ...';
+        showStatus('Отправляем...', 'ok');
+
+        try {
+            await fetch(CONFIG.endpoint, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    plan: data.plan,
+                    name: data.name,
+                    phone: data.phone,
+                    who: data.who,
+                    district: data.district,
+                    problem: data.problem,
+                    time: data.time,
+                    source: 'сайт kogniv'
+                }).toString()
+            });
+            showStatus('✓ Заявка принята! Тариф: ' + data.plan + '. Перезвоним вам в течение 15 минут.', 'ok');
+            form.reset();
+        } catch (err) {
+            console.error('Ошибка отправки:', err);
+            showStatus('Не получилось отправить автоматически. Сейчас откроется WhatsApp — отправьте заявку там.', 'err');
+            whatsappFallback(data);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'ОТПРАВИТЬ ЗАЯВКУ <span class="btn__icon">▶</span>';
+        }
+    });
+
+});
