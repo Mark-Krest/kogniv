@@ -6,7 +6,7 @@
 const CONFIG = {
     // URL веб-приложения Google Apps Script (см. инструкцию).
     // Пока пусто — заявки будут уходить в WhatsApp-фоллбэк.
-    endpoint: ''
+    endpoint: 'https://script.google.com/macros/s/AKfycbwvLs2lD4QHb3WmHGadxmg-U5QdcJq_rLqOnOJAOd23g3aUsd1T45psKasMA7rfPwA/exec'
 };
 
 const WHATSAPP_PHONE = '79604792729';
