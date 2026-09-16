@@ -1217,3 +1217,134 @@ body::after {
     .booking__box { padding: 35px 22px; }
     .booking__row { grid-template-columns: 1fr; gap: 0; }
 }
+
+/* ---------- Выбор тарифа (клик по карточке) ---------- */
+.pricing__hint {
+    color: var(--text-dim);
+    font-size: 18px;
+    margin: -30px 0 35px;
+}
+
+.price-card--selectable {
+    cursor: pointer;
+    position: relative;
+    border: 1px solid var(--border);
+    transition: border-color .25s, transform .2s, box-shadow .25s, background .25s;
+}
+
+.price-card--selectable:hover {
+    border-color: rgba(252, 238, 10, .5);
+    transform: translateY(-3px);
+}
+
+/* Выбранная карточка — жёлтая рамка + свечение */
+.price-card--selected {
+    border-color: var(--yellow) !important;
+    box-shadow: 0 0 30px rgba(252, 238, 10, .18);
+    background: linear-gradient(160deg, rgba(252, 238, 10, .05), transparent 50%);
+}
+
+/* Галочка «выбрано» в правом верхнем углу */
+.price-card__check {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    background: var(--yellow);
+    opacity: 0;
+    transform: scale(0) rotate(-90deg);
+    transition: opacity .25s, transform .3s cubic-bezier(.68, -0.55, .27, 1.55);
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+.price-card--selected .price-card__check {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+/* Кнопка «выбрать» внутри карточки */
+.price-card__select-btn {
+    display: block;
+    text-align: center;
+    font-family: var(--font-head);
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    border: 1px dashed var(--border);
+    padding: 12px;
+    transition: .2s;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.price-card--selectable:hover .price-card__select-btn {
+    color: var(--yellow);
+    border-color: var(--yellow);
+}
+
+.price-card--selected .price-card__select-btn {
+    color: #000;
+    background: var(--yellow);
+    border: 1px solid var(--yellow);
+}
+
+/* Ошибка «сначала выберите тариф» */
+.pricing__error {
+    margin-top: 25px;
+    text-align: center;
+    padding: 16px 20px;
+    font-size: 17px;
+    color: #ff6b8a;
+    background: rgba(255, 0, 60, .08);
+    border: 1px solid var(--danger);
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    animation: errorShake .4s ease;
+}
+
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+}
+
+/* ---------- Плашка выбранного тарифа в форме ---------- */
+.booking__plan {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px 20px;
+    margin-bottom: 25px;
+    background: rgba(252, 238, 10, .06);
+    border: 1px solid var(--yellow);
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+}
+
+.booking__plan-label {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    font-weight: 700;
+}
+
+.booking__plan-value {
+    font-family: var(--font-head);
+    font-size: 19px;
+    color: var(--yellow);
+    flex: 1;
+}
+
+.booking__plan-change {
+    font-size: 14px;
+    color: var(--cyan);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--cyan);
+}
+
+.booking__plan-change:hover { color: var(--yellow); border-color: var(--yellow); }
